@@ -1,0 +1,2 @@
+# baidyet
+ AI Budgeting App
