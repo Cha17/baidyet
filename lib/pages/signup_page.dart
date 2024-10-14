@@ -6,7 +6,7 @@ import 'package:baidyet/components/my_button.dart';
 import 'package:baidyet/pages/login_page.dart';
 
 class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key}) : super(key: key);
+  const SignupPage({super.key});
 
   @override
   _SignupPageState createState() => _SignupPageState();
