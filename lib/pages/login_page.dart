@@ -1,6 +1,5 @@
 import 'package:baidyet/components/auth_textfield.dart';
 import 'package:baidyet/components/my_button.dart';
-import 'package:baidyet/components/square_tile.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -16,25 +15,55 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F4F6),
+      backgroundColor: const Color(0xFFF3F4F6),
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // logo
-              Icon(
+              const Icon(
                 Icons.account_balance_wallet_rounded,
-                size: 90,
-                color: const Color(0xFF34ACB7),
+                size: 80,
+                color: Color(0xFF34ACB7),
               ),
               // Image.asset(
               //   "images/baidyet.png",
               //   width: 200,
               //   height: 200,
               // ),
-              const SizedBox(height: 20),
-              // Log in
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "b",
+                    style: TextStyle(
+                      color: Color(0xFF2C3E50),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  Text(
+                    "ai",
+                    style: TextStyle(
+                      color: Color(0xFFFF7F50),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                  Text(
+                    "dyet",
+                    style: TextStyle(
+                      fontFamily: 'DancingScript',
+                      color: Color(0xFF2C3E50),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 30),
               Text(
                 "Log in",
                 style: TextStyle(
@@ -86,55 +115,55 @@ class LoginPage extends StatelessWidget {
                 onTap: signUserIn,
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 10),
 
-              // or continue with
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        "or continue with",
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // // or continue with
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         child: Divider(
+              //           thickness: 0.5,
+              //           color: Colors.grey[400],
+              //         ),
+              //       ),
+              //       Padding(
+              //         padding: const EdgeInsets.symmetric(horizontal: 10),
+              //         child: Text(
+              //           "or continue with",
+              //           style: TextStyle(
+              //             color: Colors.grey[700],
+              //           ),
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: Divider(
+              //           thickness: 0.5,
+              //           color: Colors.grey[400],
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
-              const SizedBox(height: 40),
+              // const SizedBox(height: 40),
 
-              // google facebook
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // facebook button
-                  SquareTile(imagePath: 'images/facebook.png'),
+              // // google facebook
+              // const Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     // facebook button
+              //     SquareTile(imagePath: 'images/facebook.png'),
 
-                  SizedBox(width: 20),
+              //     SizedBox(width: 20),
 
-                  // google button
-                  SquareTile(imagePath: 'images/google.png'),
-                ],
-              ),
+              //     // google button
+              //     SquareTile(imagePath: 'images/google.png'),
+              //   ],
+              // ),
 
-              const SizedBox(height: 40),
+              // const SizedBox(height: 40),
 
               // sign up
               Row(
