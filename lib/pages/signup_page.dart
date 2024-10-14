@@ -3,42 +3,59 @@ import 'package:baidyet/JsonModels/users.dart';
 import 'package:baidyet/SQLite/sqlite.dart';
 import 'package:baidyet/components/auth_textfield.dart';
 import 'package:baidyet/components/my_button.dart';
-import 'package:baidyet/pages/home_page.dart';
-import 'package:baidyet/pages/signup_page.dart';
+import 'package:baidyet/pages/login_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final db = DatabaseHelper();
 
-  void signUserIn() async {
+  void signUserUp() async {
     if (_formKey.currentState!.validate()) {
       try {
-        bool response = await db.login(Users(
+        final db = DatabaseHelper();
+        await db.signUp(Users(
           userName: usernameController.text,
           userPassword: passwordController.text,
         ));
-
-        if (response) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );
-        } else {
-          showErrorDialog("Incorrect username or password");
-        }
+        showSuccessDialog();
       } catch (e) {
-        showErrorDialog("An error occurred. Please try again");
+        showErrorDialog("An error occurred during sign up. Please try again.");
+        print("Error during sign up: $e");
       }
     }
+  }
+
+  void showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Sign Up Successful"),
+          content: const Text("Your account has been created successfully."),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void showErrorDialog(String message) {
@@ -46,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Login Error"),
+          title: const Text("Sign Up Error"),
           content: Text(message),
           actions: <Widget>[
             TextButton(
@@ -79,11 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                     size: 80,
                     color: Color(0xFF34ACB7),
                   ),
-                  // Image.asset(
-                  //   "images/baidyet.png",
-                  //   width: 200,
-                  //   height: 200,
-                  // ),
+
+                  // app name
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -117,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 30),
                   Text(
-                    "Log in",
+                    "Sign up",
                     style: TextStyle(
                       color: Colors.grey[900],
                       fontWeight: FontWeight.bold,
@@ -126,7 +140,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   const SizedBox(height: 20),
-
                   // username textfield
                   AuthTextfield(
                     controller: usernameController,
@@ -150,91 +163,46 @@ class _LoginPageState extends State<LoginPage> {
                       if (value == null || value.isEmpty) {
                         return 'Password is required';
                       }
+                      if (value.length < 6) {
+                        return 'Password must be at least 6 characters long';
+                      }
                       return null;
                     },
                   ),
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
 
-                  // forgot passowrd
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Forgot password?",
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
+                  // confirm password
+                  PasswordTextfield(
+                    controller: confirmPasswordController,
+                    hintText: "Confirm Password",
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please confirm your password';
+                      }
+                      if (value != passwordController.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
                   ),
 
                   const SizedBox(height: 25),
 
-                  // sign in button
+                  // sign up button
                   MyButton(
-                    onTap: signUserIn,
+                    onTap: signUserUp,
                   ),
 
                   const SizedBox(height: 10),
 
-                  // // or continue with
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  //   child: Row(
-                  //     children: [
-                  //       Expanded(
-                  //         child: Divider(
-                  //           thickness: 0.5,
-                  //           color: Colors.grey[400],
-                  //         ),
-                  //       ),
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //         child: Text(
-                  //           "or continue with",
-                  //           style: TextStyle(
-                  //             color: Colors.grey[700],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       Expanded(
-                  //         child: Divider(
-                  //           thickness: 0.5,
-                  //           color: Colors.grey[400],
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
-                  // const SizedBox(height: 40),
-
-                  // // google facebook
-                  // const Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     // facebook button
-                  //     SquareTile(imagePath: 'images/facebook.png'),
-
-                  //     SizedBox(width: 20),
-
-                  //     // google button
-                  //     SquareTile(imagePath: 'images/google.png'),
-                  //   ],
-                  // ),
-
-                  // const SizedBox(height: 40),
-
-                  // sign up
+                  // Sign in
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account yet? ",
+                        "Already have an account? ",
                         style: TextStyle(
                           color: Colors.grey[700],
                         ),
@@ -245,10 +213,10 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignupPage()));
+                                  builder: (context) => const LoginPage()));
                         },
                         child: const Text(
-                          "Sign up",
+                          "Log in",
                           style: TextStyle(
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
