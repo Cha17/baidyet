@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         "ai",
                         style: TextStyle(
-                          color: Color(0xFFFF7F50),
+                          color: Color(0xFF34ACB7),
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
                         ),
@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 30),
                   Text(
-                    "Log in",
+                    "Sign in",
                     style: TextStyle(
                       color: Colors.grey[900],
                       fontWeight: FontWeight.bold,
@@ -177,6 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                   // sign in button
                   MyButton(
                     onTap: signUserIn,
+                    buttonName: "Sign in",
                   ),
 
                   const SizedBox(height: 10),

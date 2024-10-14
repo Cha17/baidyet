@@ -193,6 +193,7 @@ class _SignupPageState extends State<SignupPage> {
                   // sign up button
                   MyButton(
                     onTap: signUserUp,
+                    buttonName: "Sign up",
                   ),
 
                   const SizedBox(height: 10),
@@ -216,7 +217,7 @@ class _SignupPageState extends State<SignupPage> {
                                   builder: (context) => const LoginPage()));
                         },
                         child: const Text(
-                          "Log in",
+                          "Sign in",
                           style: TextStyle(
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
