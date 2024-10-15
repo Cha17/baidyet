@@ -17,9 +17,13 @@ class _SignupPageState extends State<SignupPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   void signUserUp() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
       try {
         final db = DatabaseHelper();
         await db.signUp(Users(
@@ -30,6 +34,10 @@ class _SignupPageState extends State<SignupPage> {
       } catch (e) {
         showErrorDialog("An error occurred during sign up. Please try again.");
         print("Error during sign up: $e");
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
@@ -191,11 +199,12 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(height: 25),
 
                   // sign up button
-                  MyButton(
-                    onTap: signUserUp,
-                    buttonName: "Sign up",
-                  ),
-
+                  _isLoading
+                      ? const CircularProgressIndicator()
+                      : MyButton(
+                          onTap: signUserUp,
+                          buttonName: "Sign up",
+                        ),
                   const SizedBox(height: 10),
 
                   // Sign in

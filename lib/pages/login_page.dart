@@ -18,9 +18,13 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final db = DatabaseHelper();
+  bool _isLoading = false;
 
   void signUserIn() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
       try {
         bool response = await db.login(Users(
           userName: usernameController.text,
@@ -37,6 +41,10 @@ class _LoginPageState extends State<LoginPage> {
         }
       } catch (e) {
         showErrorDialog("An error occurred. Please try again");
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
@@ -175,11 +183,12 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 25),
 
                   // sign in button
-                  MyButton(
-                    onTap: signUserIn,
-                    buttonName: "Sign in",
-                  ),
-
+                  _isLoading
+                      ? const CircularProgressIndicator()
+                      : MyButton(
+                          onTap: signUserIn,
+                          buttonName: "Sign in",
+                        ),
                   const SizedBox(height: 10),
 
                   // // or continue with
