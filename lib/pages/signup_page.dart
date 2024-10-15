@@ -120,7 +120,7 @@ class _SignupPageState extends State<SignupPage> {
                       Text(
                         "ai",
                         style: TextStyle(
-                          color: Color(0xFFFF7F50),
+                          color: Color(0xFF34ACB7),
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
                         ),
