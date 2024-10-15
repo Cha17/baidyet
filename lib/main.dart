@@ -1,4 +1,3 @@
-import 'package:baidyet/pages/questionnaire.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/pages/login_page.dart';
 
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const QuestionnaireWidget(),
+      home: const LoginPage(),
     );
   }
 }

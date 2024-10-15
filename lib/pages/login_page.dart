@@ -1,9 +1,9 @@
+import 'package:baidyet/pages/questionnaire.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/JsonModels/users.dart';
 import 'package:baidyet/SQLite/sqlite.dart';
 import 'package:baidyet/components/auth_textfield.dart';
 import 'package:baidyet/components/my_button.dart';
-import 'package:baidyet/pages/home_page.dart';
 import 'package:baidyet/pages/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -34,7 +34,8 @@ class _LoginPageState extends State<LoginPage> {
         if (response) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(
+                builder: (context) => const QuestionnaireWidget()),
           );
         } else {
           showErrorDialog("Incorrect username or password");
