@@ -25,7 +25,10 @@ class LikertScaleQuestion extends StatelessWidget {
         children: [
           Text(
             question,
-            style: TextStyle(fontSize: 14, color: Colors.grey[800]),
+            style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[800],
+                decoration: TextDecoration.none),
             textAlign: TextAlign.center,
             // overflow: TextOverflow.ellipsis,
             maxLines: 3,
@@ -78,11 +81,13 @@ class LikertScaleQuestion extends StatelessWidget {
                     style: TextStyle(
                       color: Color(0xFF37843A),
                       fontSize: 12,
+                      decoration: TextDecoration.none,
                     )),
                 Text('Disagree',
                     style: TextStyle(
                       color: Color(0xFFA32E25),
                       fontSize: 12,
+                      decoration: TextDecoration.none,
                     )),
               ],
             ),

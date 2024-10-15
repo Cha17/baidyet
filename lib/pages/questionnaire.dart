@@ -158,7 +158,10 @@ class _QuestionnaireWidgetState extends State<QuestionnaireWidget> {
                                 child: Text(
                                   _errorMessage!,
                                   style: const TextStyle(
-                                      color: Colors.red, fontSize: 14),
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    decoration: TextDecoration.none,
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
                               ),

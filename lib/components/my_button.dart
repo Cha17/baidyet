@@ -23,6 +23,7 @@ class MyButton extends StatelessWidget {
                   color: Color.fromARGB(255, 228, 228, 228),
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
+                  decoration: TextDecoration.none,
                 ))),
       ),
     );
