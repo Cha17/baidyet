@@ -1,4 +1,5 @@
 import 'package:baidyet/components/assessment_questions.dart';
+import 'package:baidyet/pages/app_layout.dart';
 import 'package:baidyet/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -143,6 +144,8 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
             ),
             const SizedBox(height: 10),
             Slider(
+              activeColor: Color(0xFF1A2A57),
+              thumbColor: Color(0xFF1A2A57),
               value:
                   (assessmentData['q$globalIndex'] as double?) ?? question.min!,
               min: question.min!,
@@ -188,7 +191,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
           color: isSelected
-              ? Theme.of(context).primaryColor.withOpacity(0.1)
+              ? Color(0xFF1A2A57).withOpacity(0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
@@ -200,16 +203,14 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
                   ? Icons.radio_button_checked
                   : Icons.radio_button_unchecked,
               size: 20,
-              color: isSelected ? Theme.of(context).primaryColor : Colors.grey,
+              color: isSelected ? Color(0xFF1A2A57) : Colors.grey,
             ),
             const SizedBox(width: 8),
             Flexible(
               child: Text(
                 label,
                 style: TextStyle(
-                  color: isSelected
-                      ? Theme.of(context).primaryColor
-                      : Colors.black,
+                  color: isSelected ? Color(0xFF1A2A57) : Colors.black,
                 ),
               ),
             ),
@@ -228,7 +229,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
           color: isChecked
-              ? Theme.of(context).primaryColor.withOpacity(0.1)
+              ? Color(0xFF1A2A57).withOpacity(0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
@@ -238,7 +239,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
             Icon(
               isChecked ? Icons.check_box : Icons.check_box_outline_blank,
               size: 20,
-              color: isChecked ? Theme.of(context).primaryColor : Colors.grey,
+              color: isChecked ? Color(0xFF1A2A57) : Colors.grey,
             ),
             const SizedBox(width: 8),
             Flexible(
@@ -295,74 +296,73 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-                child: LinearProgressIndicator(
-                  value: progress,
-                  backgroundColor: Colors.grey[200],
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+    return AppLayout(
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+              child: LinearProgressIndicator(
+                value: progress,
+                backgroundColor: Colors.grey[350],
+                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A2A57)),
+                borderRadius: BorderRadius.circular(12),
               ),
-              Expanded(
-                child: ListView(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.all(16.0),
-                  children: [
-                    ...currentPageQuestions
-                        .asMap()
-                        .entries
-                        .map((entry) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 12.0),
-                                  child: _buildQuestionWidget(
-                                      entry.value, entry.key),
-                                ),
-                                if (entry.key < currentPageQuestions.length - 1)
-                                  const Divider(),
-                                const SizedBox(height: 12),
-                              ],
-                            ))
-                        .toList(),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (currentPage > 0)
-                          ElevatedButton(
-                            onPressed: _previousPage,
-                            child: const Text('Previous'),
-                          )
-                        else
-                          const SizedBox(), // Empty SizedBox for spacing when there's no Previous button
+            ),
+            Expanded(
+              child: ListView(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(16.0),
+                children: [
+                  ...currentPageQuestions
+                      .asMap()
+                      .entries
+                      .map((entry) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: _buildQuestionWidget(
+                                    entry.value, entry.key),
+                              ),
+                              if (entry.key < currentPageQuestions.length - 1)
+                                const Divider(),
+                              const SizedBox(height: 12),
+                            ],
+                          ))
+                      .toList(),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (currentPage > 0)
                         ElevatedButton(
-                          onPressed: lastAnsweredQuestionIndex >=
-                                      (currentPage + 1) * questionsPerPage -
-                                          1 ||
-                                  (currentPage == totalPages - 1 &&
-                                      lastAnsweredQuestionIndex ==
-                                          questions.length - 1)
-                              ? _nextPage
-                              : null,
-                          child: Text(currentPage == totalPages - 1
-                              ? 'Submit'
-                              : 'Next'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                          onPressed: _previousPage,
+                          child: const Text('Previous'),
+                        )
+                      else
+                        const SizedBox(), // Empty SizedBox for spacing when there's no Previous button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1A2A57)),
+                        onPressed: lastAnsweredQuestionIndex >=
+                                    (currentPage + 1) * questionsPerPage - 1 ||
+                                (currentPage == totalPages - 1 &&
+                                    lastAnsweredQuestionIndex ==
+                                        questions.length - 1)
+                            ? _nextPage
+                            : null,
+                        child: Text(
+                            style: const TextStyle(color: Color(0xFFE4E4E4)),
+                            currentPage == totalPages - 1 ? 'Submit' : 'Next'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

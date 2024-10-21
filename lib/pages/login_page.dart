@@ -1,5 +1,5 @@
+import 'package:baidyet/pages/app_layout.dart';
 import 'package:baidyet/pages/assessment.dart';
-import 'package:baidyet/pages/questionnaire.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/JsonModels/users.dart';
 import 'package:baidyet/SQLite/sqlite.dart';
@@ -73,204 +73,201 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF3F4F6),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // logo
-                  const Icon(
-                    Icons.account_balance_wallet_rounded,
-                    size: 80,
-                    color: Color(0xFF34ACB7),
+    return AppLayout(
+      child: Center(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // logo
+                const Icon(
+                  Icons.account_balance_wallet_rounded,
+                  size: 80,
+                  color: Color(0xFFDAA520), // Goldenrod color
+                ),
+                // Image.asset(
+                //   "images/baidyet.png",
+                //   width: 200,
+                //   height: 200,
+                // ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "b",
+                      style: TextStyle(
+                        color: Color(0xFF1A2A57),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                    Text(
+                      "ai",
+                      style: TextStyle(
+                        color: Color(0xFFDAA520),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                    Text(
+                      "dyet",
+                      style: TextStyle(
+                        fontFamily: 'DancingScript',
+                        color: Color(0xFF1A2A57),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 30),
+                Text(
+                  "Sign in",
+                  style: TextStyle(
+                    color: Colors.grey[900],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
-                  // Image.asset(
-                  //   "images/baidyet.png",
-                  //   width: 200,
-                  //   height: 200,
-                  // ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                ),
+
+                const SizedBox(height: 20),
+
+                // username textfield
+                AuthTextfield(
+                  controller: usernameController,
+                  hintText: "Username",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Username is required';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 20),
+
+                // password textfield
+                PasswordTextfield(
+                  controller: passwordController,
+                  hintText: "Password",
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password is required';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 10),
+
+                // forgot passowrd
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        "b",
+                        "Forgot password?",
                         style: TextStyle(
-                          color: Color(0xFF2C3E50),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      ),
-                      Text(
-                        "ai",
-                        style: TextStyle(
-                          color: Color(0xFF34ACB7),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      ),
-                      Text(
-                        "dyet",
-                        style: TextStyle(
-                          fontFamily: 'DancingScript',
-                          color: Color(0xFF2C3E50),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                          color: Colors.grey[600],
                         ),
                       ),
                     ],
                   ),
+                ),
 
-                  const SizedBox(height: 30),
-                  Text(
-                    "Sign in",
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                const SizedBox(height: 25),
+
+                // sign in button
+                _isLoading
+                    ? const CircularProgressIndicator()
+                    : MyButton(
+                        onTap: signUserIn,
+                        buttonName: "Log in",
+                      ),
+                const SizedBox(height: 10),
+
+                // // or continue with
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //         child: Divider(
+                //           thickness: 0.5,
+                //           color: Colors.grey[400],
+                //         ),
+                //       ),
+                //       Padding(
+                //         padding: const EdgeInsets.symmetric(horizontal: 10),
+                //         child: Text(
+                //           "or continue with",
+                //           style: TextStyle(
+                //             color: Colors.grey[700],
+                //           ),
+                //         ),
+                //       ),
+                //       Expanded(
+                //         child: Divider(
+                //           thickness: 0.5,
+                //           color: Colors.grey[400],
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+
+                // const SizedBox(height: 40),
+
+                // // google facebook
+                // const Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     // facebook button
+                //     SquareTile(imagePath: 'images/facebook.png'),
+
+                //     SizedBox(width: 20),
+
+                //     // google button
+                //     SquareTile(imagePath: 'images/google.png'),
+                //   ],
+                // ),
+
+                // const SizedBox(height: 40),
+
+                // sign up
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account yet? ",
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                      ),
                     ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // username textfield
-                  AuthTextfield(
-                    controller: usernameController,
-                    hintText: "Username",
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Username is required';
-                      }
-                      return null;
-                    },
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // password textfield
-                  PasswordTextfield(
-                    controller: passwordController,
-                    hintText: "Password",
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Password is required';
-                      }
-                      return null;
-                    },
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // forgot passowrd
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Forgot password?",
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 25),
-
-                  // sign in button
-                  _isLoading
-                      ? const CircularProgressIndicator()
-                      : MyButton(
-                          onTap: signUserIn,
-                          buttonName: "Log in",
-                        ),
-                  const SizedBox(height: 10),
-
-                  // // or continue with
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  //   child: Row(
-                  //     children: [
-                  //       Expanded(
-                  //         child: Divider(
-                  //           thickness: 0.5,
-                  //           color: Colors.grey[400],
-                  //         ),
-                  //       ),
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //         child: Text(
-                  //           "or continue with",
-                  //           style: TextStyle(
-                  //             color: Colors.grey[700],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       Expanded(
-                  //         child: Divider(
-                  //           thickness: 0.5,
-                  //           color: Colors.grey[400],
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
-                  // const SizedBox(height: 40),
-
-                  // // google facebook
-                  // const Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     // facebook button
-                  //     SquareTile(imagePath: 'images/facebook.png'),
-
-                  //     SizedBox(width: 20),
-
-                  //     // google button
-                  //     SquareTile(imagePath: 'images/google.png'),
-                  //   ],
-                  // ),
-
-                  // const SizedBox(height: 40),
-
-                  // sign up
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account yet? ",
+                    const SizedBox(height: 4),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignupPage()));
+                      },
+                      child: const Text(
+                        "Sign up",
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignupPage()));
-                        },
-                        child: const Text(
-                          "Sign up",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

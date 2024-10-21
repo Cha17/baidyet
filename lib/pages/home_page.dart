@@ -1,4 +1,4 @@
-//import 'package:flutter/foundation.dart';
+import 'package:baidyet/pages/app_layout.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,6 +6,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Home Page');
+    return const AppLayout(
+      child: Center(
+        child: Text('Home Page'),
+      ),
+    );
   }
 }

@@ -23,7 +23,7 @@ class AuthTextfield extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color: Color(0xFFA3E4D7),
+              color: Color(0xFF5980A6),
             ),
           ),
           focusedBorder: OutlineInputBorder(
@@ -32,7 +32,7 @@ class AuthTextfield extends StatelessWidget {
               color: Color(0xFF2C3E50),
             ),
           ),
-          fillColor: Colors.grey[200],
+          fillColor: Colors.grey[50],
           filled: true,
           hintText: hintText,
           labelText: hintText,
@@ -78,7 +78,7 @@ class _PasswordTextfieldState extends State<PasswordTextfield> {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color: Color(0xFFA3E4D7),
+              color: Color(0xFF5980A6),
             ),
           ),
           focusedBorder: OutlineInputBorder(
@@ -87,7 +87,7 @@ class _PasswordTextfieldState extends State<PasswordTextfield> {
               color: Color(0xFF2C3E50),
             ),
           ),
-          fillColor: Colors.grey[200],
+          fillColor: Colors.grey[50],
           filled: true,
           hintText: widget.hintText,
           labelText: widget.hintText,

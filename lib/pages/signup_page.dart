@@ -1,3 +1,4 @@
+import 'package:baidyet/pages/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/JsonModels/users.dart';
 import 'package:baidyet/SQLite/sqlite.dart';
@@ -88,155 +89,152 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF3F4F6),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // logo
-                  const Icon(
-                    Icons.account_balance_wallet_rounded,
-                    size: 80,
-                    color: Color(0xFF34ACB7),
-                  ),
+    return AppLayout(
+      child: Center(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // logo
+                const Icon(
+                  Icons.account_balance_wallet_rounded,
+                  size: 80,
+                  color: Color(0xFFDAA520),
+                ),
 
-                  // app name
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "b",
-                        style: TextStyle(
-                          color: Color(0xFF2C3E50),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
+                // app name
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "b",
+                      style: TextStyle(
+                        color: Color(0xFF1A2A57),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
                       ),
-                      Text(
-                        "ai",
-                        style: TextStyle(
-                          color: Color(0xFF34ACB7),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      ),
-                      Text(
-                        "dyet",
-                        style: TextStyle(
-                          fontFamily: 'DancingScript',
-                          color: Color(0xFF2C3E50),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 30),
-                  Text(
-                    "Sign up",
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
                     ),
+                    Text(
+                      "ai",
+                      style: TextStyle(
+                        color: Color(0xFFDAA520),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                    Text(
+                      "dyet",
+                      style: TextStyle(
+                        fontFamily: 'DancingScript',
+                        color: Color(0xFF1A2A57),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 30),
+                Text(
+                  "Sign up",
+                  style: TextStyle(
+                    color: Colors.grey[900],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
+                ),
 
-                  const SizedBox(height: 20),
-                  // username textfield
-                  AuthTextfield(
-                    controller: usernameController,
-                    hintText: "Username",
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Username is required';
-                      }
-                      return null;
-                    },
-                  ),
+                const SizedBox(height: 20),
+                // username textfield
+                AuthTextfield(
+                  controller: usernameController,
+                  hintText: "Username",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Username is required';
+                    }
+                    return null;
+                  },
+                ),
 
-                  const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                  // password textfield
-                  PasswordTextfield(
-                    controller: passwordController,
-                    hintText: "Password",
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Password is required';
-                      }
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters long';
-                      }
-                      return null;
-                    },
-                  ),
+                // password textfield
+                PasswordTextfield(
+                  controller: passwordController,
+                  hintText: "Password",
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password is required';
+                    }
+                    if (value.length < 6) {
+                      return 'Password must be at least 6 characters long';
+                    }
+                    return null;
+                  },
+                ),
 
-                  const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                  // confirm password
-                  PasswordTextfield(
-                    controller: confirmPasswordController,
-                    hintText: "Confirm Password",
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please confirm your password';
-                      }
-                      if (value != passwordController.text) {
-                        return 'Passwords do not match';
-                      }
-                      return null;
-                    },
-                  ),
+                // confirm password
+                PasswordTextfield(
+                  controller: confirmPasswordController,
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please confirm your password';
+                    }
+                    if (value != passwordController.text) {
+                      return 'Passwords do not match';
+                    }
+                    return null;
+                  },
+                ),
 
-                  const SizedBox(height: 25),
+                const SizedBox(height: 25),
 
-                  // sign up button
-                  _isLoading
-                      ? const CircularProgressIndicator()
-                      : MyButton(
-                          onTap: signUserUp,
-                          buttonName: "Sign up",
-                        ),
-                  const SizedBox(height: 10),
+                // sign up button
+                _isLoading
+                    ? const CircularProgressIndicator()
+                    : MyButton(
+                        onTap: signUserUp,
+                        buttonName: "Sign up",
+                      ),
+                const SizedBox(height: 10),
 
-                  // Sign in
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Already have an account? ",
+                // Sign in
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account? ",
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                      },
+                      child: const Text(
+                        "Sign in",
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginPage()));
-                        },
-                        child: const Text(
-                          "Sign in",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
