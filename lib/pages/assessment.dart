@@ -1,6 +1,6 @@
 import 'package:baidyet/components/assessment_questions.dart';
+import 'package:baidyet/components/botnavbar_layout.dart';
 import 'package:baidyet/pages/app_layout.dart';
-import 'package:baidyet/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class FinancialAssessment extends StatefulWidget {
@@ -277,7 +277,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
       print(assessmentData);
       // Navigate to the next screen or generate budget plans
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const BotNavBarLayout()),
       );
     }
   }

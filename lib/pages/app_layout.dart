@@ -17,7 +17,7 @@ class _AppLayoutState extends State<AppLayout> {
       body: SafeArea(
         child: Stack(
           children: [
-            const Background(),
+            const Background(child: SizedBox.shrink()),
             widget.child,
           ],
         ),
