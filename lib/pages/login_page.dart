@@ -1,3 +1,4 @@
+import 'package:baidyet/pages/assessment.dart';
 import 'package:baidyet/pages/questionnaire.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/JsonModels/users.dart';
@@ -35,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const QuestionnaireWidget()),
+                builder: (context) => const FinancialAssessment()),
           );
         } else {
           showErrorDialog("Incorrect username or password");
@@ -188,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                       ? const CircularProgressIndicator()
                       : MyButton(
                           onTap: signUserIn,
-                          buttonName: "Sign in",
+                          buttonName: "Log in",
                         ),
                   const SizedBox(height: 10),
 
