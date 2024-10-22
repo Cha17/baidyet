@@ -1,10 +1,10 @@
-import 'package:baidyet/pages/app_layout.dart';
+import 'package:baidyet/components/app_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/JsonModels/users.dart';
 import 'package:baidyet/SQLite/sqlite.dart';
 import 'package:baidyet/components/auth_textfield.dart';
 import 'package:baidyet/components/my_button.dart';
-import 'package:baidyet/pages/login_page.dart';
+import 'package:baidyet/pages/authentication/login_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});

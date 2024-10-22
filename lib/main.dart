@@ -1,5 +1,6 @@
+import 'package:baidyet/pages/budget_input.dart';
 import 'package:flutter/material.dart';
-import 'package:baidyet/pages/login_page.dart';
+import 'package:baidyet/pages/authentication/login_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const BudgetInputScreen(),
     );
   }
 }

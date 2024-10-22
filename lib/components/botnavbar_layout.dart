@@ -1,9 +1,9 @@
 import 'package:baidyet/components/background.dart';
-import 'package:baidyet/pages/add_button.dart';
-import 'package:baidyet/pages/budget.dart';
-import 'package:baidyet/pages/educ.dart';
-import 'package:baidyet/pages/home_page.dart';
-import 'package:baidyet/pages/insights.dart';
+import 'package:baidyet/pages/main_pages/add_button.dart';
+import 'package:baidyet/pages/main_pages/budget.dart';
+import 'package:baidyet/pages/main_pages/educ.dart';
+import 'package:baidyet/pages/main_pages/home_page.dart';
+import 'package:baidyet/pages/main_pages/insights.dart';
 import 'package:flutter/material.dart';
 
 class BotNavBarLayout extends StatefulWidget {

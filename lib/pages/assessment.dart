@@ -1,6 +1,6 @@
 import 'package:baidyet/components/assessment_questions.dart';
 import 'package:baidyet/components/botnavbar_layout.dart';
-import 'package:baidyet/pages/app_layout.dart';
+import 'package:baidyet/components/app_layout.dart';
 import 'package:flutter/material.dart';
 
 class FinancialAssessment extends StatefulWidget {
