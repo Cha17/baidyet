@@ -1,4 +1,4 @@
-import 'package:baidyet/components/assessment_questions.dart';
+import 'package:baidyet/components/assessment_questions-2.dart';
 import 'package:baidyet/components/botnavbar_layout.dart';
 import 'package:baidyet/pages/app_layout.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +20,24 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
 
   late List<AssessmentQuestion> questions;
 
+  Map<String, String> answers = {};
+
+//Function para sa pagkasubmit pero may error pa ung processAssessment method
+  /*void submitAssessment() async {
+    final results = await FinancialAssessment.processAssessment(answers);
+    // Navigate to results page with personality profile
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultsPage(results: results),
+      ),
+    );
+  }*/
+
   @override
   void initState() {
     super.initState();
-    questions = getAssessmentQuestions();
+    questions = AssessmentQuestionService.getAssessmentQuestions();
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _showDescriptionDialog());
   }
@@ -368,3 +382,5 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
     );
   }
 }
+
+
