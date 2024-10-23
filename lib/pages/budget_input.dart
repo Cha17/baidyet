@@ -148,8 +148,19 @@ class _BudgetInputScreenState extends State<BudgetInputScreen> {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
+                        // no default icon for the peso, so this is the alternative
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.attach_money),
+                          prefixIcon: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 9),
+                            child: Text(
+                              '₱',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                           border: OutlineInputBorder(),
                           hintText: 'Enter your total budget',
                         ),
@@ -305,7 +316,7 @@ class _BudgetInputScreenState extends State<BudgetInputScreen> {
                                       child: TextField(
                                         keyboardType: TextInputType.number,
                                         decoration: const InputDecoration(
-                                          prefixText: '\$',
+                                          prefixText: '\₱',
                                           border: OutlineInputBorder(),
                                         ),
                                         controller: TextEditingController(
@@ -381,7 +392,7 @@ class _BudgetInputScreenState extends State<BudgetInputScreen> {
                         children: [
                           const Text('Total Allocated:'),
                           Text(
-                            '\$${getTotalAllocated().toStringAsFixed(2)}',
+                            '\₱${getTotalAllocated().toStringAsFixed(2)}',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -392,7 +403,7 @@ class _BudgetInputScreenState extends State<BudgetInputScreen> {
                         children: [
                           const Text('Remaining:'),
                           Text(
-                            '\$${getRemaining().toStringAsFixed(2)}',
+                            '\₱${getRemaining().toStringAsFixed(2)}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: getRemaining() < 0
@@ -415,7 +426,7 @@ class _BudgetInputScreenState extends State<BudgetInputScreen> {
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    'You have exceeded your total budget by \$${(-getRemaining()).toStringAsFixed(2)}',
+                                    'You have exceeded your total budget by \₱${(-getRemaining()).toStringAsFixed(2)}',
                                     style:
                                         TextStyle(color: Colors.red.shade700),
                                   ),
