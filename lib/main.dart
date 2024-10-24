@@ -1,6 +1,5 @@
 import 'package:baidyet/components/constants/colors.dart';
 import 'package:baidyet/pages/main_pages/home_page.dart';
-import 'package:baidyet/pages/sample.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/pages/authentication/login_page.dart';
 
