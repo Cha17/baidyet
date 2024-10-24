@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => const FinancialAssessment()),
+                builder: (context) => FinancialAssessment()),
           );
         } else {
           showErrorDialog("Incorrect username or password");

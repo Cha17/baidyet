@@ -2,10 +2,16 @@ import 'package:baidyet/components/constants/colors.dart';
 import 'package:baidyet/pages/main_pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/pages/authentication/login_page.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+Future main() async {
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+// Initialize FFI
+sqfliteFfiInit();
+
+
+ databaseFactory = databaseFactoryFfi;
+ WidgetsFlutterBinding.ensureInitialized();
+ runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: bColor),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:baidyet/components/assessment_questions-2.dart';
 import 'package:baidyet/components/app_layout.dart';
 import 'package:baidyet/pages/budget_input.dart';
+import 'package:baidyet/pages/main_pages/assessmentResult.dart';
 import 'package:flutter/material.dart';
+import 'package:baidyet/components/financial_assessment.dart';
 
 class FinancialAssessment extends StatefulWidget {
-  const FinancialAssessment({super.key});
-
   @override
   _FinancialAssessmentState createState() => _FinancialAssessmentState();
 }
@@ -23,16 +23,20 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
   Map<String, String> answers = {};
 
 //Function para sa pagkasubmit pero may error pa ung processAssessment method
-  /*void submitAssessment() async {
-    final results = await FinancialAssessment.processAssessment(answers);
+  void submitAssessment() async {
+    final results = await Financial_Assessment.processAssessment(answers);
+    /*print(results);
+    final double overallScore = results['overall_score'];*/
+
     // Navigate to results page with personality profile
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => ResultsPage(results: results),
+        builder: (context) =>
+            assessmentResult(results: results, answers: answers),
       ),
     );
-  }*/
+  }
 
   @override
   void initState() {
@@ -357,7 +361,9 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
                                 (currentPage == totalPages - 1 &&
                                     lastAnsweredQuestionIndex ==
                                         questions.length - 1)
-                            ? _nextPage
+                            ? currentPage == totalPages - 1
+                                ? submitAssessment
+                                : _nextPage
                             : null,
                         child: Text(
                             style: const TextStyle(color: Color(0xFFE4E4E4)),
