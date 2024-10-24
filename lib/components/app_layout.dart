@@ -12,6 +12,8 @@ class AppLayout extends StatefulWidget {
   final bool showBottomNav;
   final int? currentIndex;
   final Function(int)? onNavigationChanged;
+  final bool showFloatingButton;
+  final Function()? floatingFunction;
 
   const AppLayout({
     super.key,
@@ -19,6 +21,8 @@ class AppLayout extends StatefulWidget {
     this.showBottomNav = false,
     this.currentIndex,
     this.onNavigationChanged,
+    this.showFloatingButton = false,
+    this.floatingFunction,
   });
 
   @override
@@ -108,6 +112,13 @@ class _AppLayoutState extends State<AppLayout> {
               backgroundColor: bColor,
               selectedItemColor: yColor,
               unselectedItemColor: Colors.white,
+            )
+          : null,
+      floatingActionButton: widget.showFloatingButton
+          ? FloatingActionButton(
+              onPressed: widget.floatingFunction,
+              backgroundColor: yColor,
+              child: const Icon(Icons.add),
             )
           : null,
     );
