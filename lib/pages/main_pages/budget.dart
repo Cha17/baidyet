@@ -7,8 +7,10 @@ class Budget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppLayout(
+      showBottomNav: true,
+      currentIndex: 1,
       child: Center(
-        child: Text('Budget Page'),
+        child: Text("Budget"),
       ),
     );
   }

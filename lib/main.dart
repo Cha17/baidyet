@@ -1,4 +1,5 @@
-import 'package:baidyet/pages/budget_input.dart';
+import 'package:baidyet/components/constants/colors.dart';
+import 'package:baidyet/pages/main_pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:baidyet/pages/authentication/login_page.dart';
 
@@ -16,10 +17,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'baidyet',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: bColor),
         useMaterial3: true,
       ),
-      home: const BudgetInputScreen(),
+      home: const HomePage(),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:baidyet/components/app_layout.dart';
-import 'package:baidyet/components/botnavbar_layout.dart';
 import 'package:baidyet/components/custom_textfield.dart';
 import 'package:baidyet/components/my_button.dart';
+import 'package:baidyet/pages/main_pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class BudgetInputScreen extends StatefulWidget {
-  const BudgetInputScreen({Key? key}) : super(key: key);
+  const BudgetInputScreen({super.key});
 
   @override
   _BudgetInputScreenState createState() => _BudgetInputScreenState();
@@ -313,8 +313,7 @@ class _BudgetInputScreenState extends State<BudgetInputScreen> {
           MyButton(
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => const BotNavBarLayout()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
             },
             buttonName: 'Generate Budget Plans',

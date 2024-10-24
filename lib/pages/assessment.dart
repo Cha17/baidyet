@@ -1,10 +1,10 @@
 import 'package:baidyet/components/assessment_questions-2.dart';
-import 'package:baidyet/components/botnavbar_layout.dart';
 import 'package:baidyet/components/app_layout.dart';
+import 'package:baidyet/pages/budget_input.dart';
 import 'package:flutter/material.dart';
 
 class FinancialAssessment extends StatefulWidget {
-  const FinancialAssessment({Key? key}) : super(key: key);
+  const FinancialAssessment({super.key});
 
   @override
   _FinancialAssessmentState createState() => _FinancialAssessmentState();
@@ -92,23 +92,21 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
-            ...question.options!
-                .map((option) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: _buildCustomRadioButton(
-                        option,
-                        option == assessmentData['q$globalIndex'],
-                        isEnabled
-                            ? () {
-                                setState(() {
-                                  assessmentData['q$globalIndex'] = option;
-                                  _onQuestionAnswered(globalIndex);
-                                });
-                              }
-                            : null,
-                      ),
-                    ))
-                .toList(),
+            ...question.options!.map((option) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: _buildCustomRadioButton(
+                    option,
+                    option == assessmentData['q$globalIndex'],
+                    isEnabled
+                        ? () {
+                            setState(() {
+                              assessmentData['q$globalIndex'] = option;
+                              _onQuestionAnswered(globalIndex);
+                            });
+                          }
+                        : null,
+                  ),
+                )),
           ],
         );
         break;
@@ -121,30 +119,28 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
-            ...(question.options as List<String>)
-                .map((option) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: _buildCustomCheckbox(
-                        option,
-                        (assessmentData['q$globalIndex']
-                                as Map<String, bool>?)?[option] ??
-                            false,
-                        isEnabled
-                            ? (bool? value) {
-                                setState(() {
-                                  assessmentData['q$globalIndex'] = {
-                                    ...(assessmentData['q$globalIndex']
-                                            as Map<String, bool>? ??
-                                        {}),
-                                    option: value ?? false
-                                  };
-                                  _onQuestionAnswered(globalIndex);
-                                });
-                              }
-                            : null,
-                      ),
-                    ))
-                .toList(),
+            ...(question.options as List<String>).map((option) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: _buildCustomCheckbox(
+                    option,
+                    (assessmentData['q$globalIndex']
+                            as Map<String, bool>?)?[option] ??
+                        false,
+                    isEnabled
+                        ? (bool? value) {
+                            setState(() {
+                              assessmentData['q$globalIndex'] = {
+                                ...(assessmentData['q$globalIndex']
+                                        as Map<String, bool>? ??
+                                    {}),
+                                option: value ?? false
+                              };
+                              _onQuestionAnswered(globalIndex);
+                            });
+                          }
+                        : null,
+                  ),
+                )),
           ],
         );
         break;
@@ -158,8 +154,8 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
             ),
             const SizedBox(height: 10),
             Slider(
-              activeColor: Color(0xFF1A2A57),
-              thumbColor: Color(0xFF1A2A57),
+              activeColor: const Color(0xFF1A2A57),
+              thumbColor: const Color(0xFF1A2A57),
               value:
                   (assessmentData['q$globalIndex'] as double?) ?? question.min!,
               min: question.min!,
@@ -205,7 +201,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
           color: isSelected
-              ? Color(0xFF1A2A57).withOpacity(0.1)
+              ? const Color(0xFF1A2A57).withOpacity(0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
@@ -217,14 +213,14 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
                   ? Icons.radio_button_checked
                   : Icons.radio_button_unchecked,
               size: 20,
-              color: isSelected ? Color(0xFF1A2A57) : Colors.grey,
+              color: isSelected ? const Color(0xFF1A2A57) : Colors.grey,
             ),
             const SizedBox(width: 8),
             Flexible(
               child: Text(
                 label,
                 style: TextStyle(
-                  color: isSelected ? Color(0xFF1A2A57) : Colors.black,
+                  color: isSelected ? const Color(0xFF1A2A57) : Colors.black,
                 ),
               ),
             ),
@@ -243,7 +239,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
           color: isChecked
-              ? Color(0xFF1A2A57).withOpacity(0.1)
+              ? const Color(0xFF1A2A57).withOpacity(0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
@@ -253,7 +249,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
             Icon(
               isChecked ? Icons.check_box : Icons.check_box_outline_blank,
               size: 20,
-              color: isChecked ? Color(0xFF1A2A57) : Colors.grey,
+              color: isChecked ? const Color(0xFF1A2A57) : Colors.grey,
             ),
             const SizedBox(width: 8),
             Flexible(
@@ -291,7 +287,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
       print(assessmentData);
       // Navigate to the next screen or generate budget plans
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const BotNavBarLayout()),
+        MaterialPageRoute(builder: (context) => const BudgetInputScreen()),
       );
     }
   }
@@ -320,7 +316,8 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
               child: LinearProgressIndicator(
                 value: progress,
                 backgroundColor: Colors.grey[350],
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A2A57)),
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(Color(0xFF1A2A57)),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
@@ -329,23 +326,18 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
                 controller: _scrollController,
                 padding: const EdgeInsets.all(16.0),
                 children: [
-                  ...currentPageQuestions
-                      .asMap()
-                      .entries
-                      .map((entry) => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 12.0),
-                                child: _buildQuestionWidget(
-                                    entry.value, entry.key),
-                              ),
-                              if (entry.key < currentPageQuestions.length - 1)
-                                const Divider(),
-                              const SizedBox(height: 12),
-                            ],
-                          ))
-                      .toList(),
+                  ...currentPageQuestions.asMap().entries.map((entry) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 12.0),
+                            child: _buildQuestionWidget(entry.value, entry.key),
+                          ),
+                          if (entry.key < currentPageQuestions.length - 1)
+                            const Divider(),
+                          const SizedBox(height: 12),
+                        ],
+                      )),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -359,7 +351,7 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
                         const SizedBox(), // Empty SizedBox for spacing when there's no Previous button
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1A2A57)),
+                            backgroundColor: const Color(0xFF1A2A57)),
                         onPressed: lastAnsweredQuestionIndex >=
                                     (currentPage + 1) * questionsPerPage - 1 ||
                                 (currentPage == totalPages - 1 &&
@@ -382,5 +374,3 @@ class _FinancialAssessmentState extends State<FinancialAssessment> {
     );
   }
 }
-
-

@@ -28,7 +28,7 @@ class CustomTextField extends StatelessWidget {
   final BoxConstraints? constraints;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     this.label,
     this.tooltip,
     this.hintText,
@@ -53,7 +53,7 @@ class CustomTextField extends StatelessWidget {
     this.fillColor,
     this.contentPadding,
     this.constraints,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

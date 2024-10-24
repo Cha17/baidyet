@@ -7,6 +7,8 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppLayout(
+      showBottomNav: true,
+      currentIndex: 2,
       child: Center(
         child: Text('Add Page'),
       ),

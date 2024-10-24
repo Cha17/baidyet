@@ -5,15 +5,16 @@ import 'package:baidyet/pages/main_pages/budget.dart';
 import 'package:baidyet/pages/main_pages/educ.dart';
 import 'package:baidyet/pages/main_pages/home_page.dart';
 import 'package:baidyet/pages/main_pages/insights.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-class AppLayout extends StatefulWidget {
+class Sample extends StatefulWidget {
   final Widget child;
   final bool showBottomNav;
   final int? currentIndex;
   final Function(int)? onNavigationChanged;
 
-  const AppLayout({
+  const Sample({
     super.key,
     required this.child,
     this.showBottomNav = false,
@@ -22,10 +23,10 @@ class AppLayout extends StatefulWidget {
   });
 
   @override
-  _AppLayoutState createState() => _AppLayoutState();
+  _SampleState createState() => _SampleState();
 }
 
-class _AppLayoutState extends State<AppLayout> {
+class _SampleState extends State<Sample> {
   void _handleNavigation(int index) {
     if (widget.onNavigationChanged != null) {
       widget.onNavigationChanged!(index);
@@ -67,6 +68,16 @@ class _AppLayoutState extends State<AppLayout> {
     );
   }
 
+  final List<Widget> _botNavBarItems = [
+    const Icon(
+      Icons.home_rounded,
+      color: yColor,
+    ),
+    const Icon(Icons.account_balance_wallet_rounded, color: yColor),
+    const Icon(Icons.add_circle_rounded, color: yColor),
+    const Icon(Icons.insights_rounded, color: yColor),
+    const Icon(Icons.book_rounded, color: yColor),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,38 +89,11 @@ class _AppLayoutState extends State<AppLayout> {
           ],
         ),
       ),
-      bottomNavigationBar: widget.showBottomNav
-          ? BottomNavigationBar(
-              currentIndex: widget.currentIndex ?? 0,
-              onTap: _handleNavigation,
-              type: BottomNavigationBarType.fixed,
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_rounded),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.account_balance_wallet_rounded),
-                  label: 'Budget',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add_circle_rounded, size: 40),
-                  label: 'Add',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.insights_rounded),
-                  label: 'Insights',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.book_rounded),
-                  label: 'Education',
-                ),
-              ],
-              backgroundColor: bColor,
-              selectedItemColor: yColor,
-              unselectedItemColor: Colors.white,
-            )
-          : null,
+      bottomNavigationBar: CurvedNavigationBar(
+        items: _botNavBarItems,
+        color: bColor,
+        backgroundColor: Colors.transparent.withOpacity(0.0),
+      ),
     );
   }
 }

@@ -22,7 +22,7 @@ class Background extends StatelessWidget {
           Positioned(
             left: -screenWidth * 0.5,
             top: -screenHeight * 0.01,
-            child: Container(
+            child: SizedBox(
               width: screenWidth * 2,
               height: screenHeight * 1.2,
               child: Stack(
